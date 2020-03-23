@@ -1,0 +1,14 @@
+{
+  "name": "local-storage-setting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/leobastiani/local-storage-setting",
+  "author": "Leonardo Guarnieri de Bastiani",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^25.1.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
