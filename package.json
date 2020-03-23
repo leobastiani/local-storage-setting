@@ -6,9 +6,11 @@
   "author": "Leonardo Guarnieri de Bastiani",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "standard": "^14.3.3"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "standard --env jest --env browser"
   }
 }
