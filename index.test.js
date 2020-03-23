@@ -70,5 +70,10 @@ describe('can be a', () => {
 
     obj.name = { a: 1, b: 2 }
     expect(obj.name).toEqual({ a: 1, b: 2 })
+    expect(localStorage.getItem('name')).toBe('{"a":1,"b":2}')
+
+    localStorage.setItem('name2', localStorage.getItem('name'))
+    localStorageSetting(obj, 'name2', { a: 'b', c: 'd' })
+    expect(obj.name2).toEqual({ a: 1, b: 2 })
   })
 })
