@@ -8,7 +8,8 @@ beforeEach(() => {
 
 it('must set', () => {
   const obj = {}
-  localStorageSetting(obj, 'name', 'value')
+  const ret = localStorageSetting(obj, 'name', 'value')
+  expect(ret === obj).toBe(true)
   obj.name = 'value2'
   expect(obj.name).toBe('value2')
   expect(localStorage.getItem('name')).toBe('"value2"')

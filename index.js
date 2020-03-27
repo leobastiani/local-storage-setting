@@ -80,4 +80,6 @@ module.exports = (scope, name, defaultValue, config = {}) => {
       return localStorageSetting.set(value)
     }
   })
+
+  return scope
 }
