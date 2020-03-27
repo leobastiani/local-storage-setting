@@ -60,10 +60,9 @@ describe('can be a', () => {
     ${'with default'}
   `('array $comment', ({ comment }) => {
     const obj = {}
-    if(comment == 'without default') {
+    if (comment == 'without default') {
       localStorageSetting(obj, 'name', [1, 2, 3], { type: Array })
-    }
-    else {
+    } else {
       localStorageSetting(obj, 'name', [], { type: Array })
       obj.name = [1, 2, 3]
       expect(localStorage.getItem('name')).toBe('[1,2,3]')

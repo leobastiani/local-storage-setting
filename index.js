@@ -3,7 +3,7 @@ const { appendToFunction } = require('function-extend')
 const symbol = Symbol('LocalStorageSetting')
 
 class LocalStorageSetting {
-  constructor(name, defaultValue, config = {}) {
+  constructor (name, defaultValue, config = {}) {
     if (instances[name]) {
       return instances[name]
     }
@@ -21,11 +21,11 @@ class LocalStorageSetting {
     instances[name] = this
   }
 
-  get() {
+  get () {
     return this.has ? this.value : this.asValue(this.defaultValue)
   }
 
-  set(value) {
+  set (value) {
     this.value = this.asValue(value)
     this.has = true
     this.bypassArray()
@@ -33,20 +33,20 @@ class LocalStorageSetting {
     return this.value
   }
 
-  bypassArray() {
+  bypassArray () {
     if (this.config.type === Array) {
-      const value = this.get();
+      const value = this.get()
       if (!value[symbol]) {
         const methods = ['pop', 'push', 'shift', 'splice', 'unshift']
         for (const method of methods) {
-          appendToFunction(value, method, () => this.set(value));
+          appendToFunction(value, method, () => this.set(value))
         }
-        value[this.symbol] = true;
+        value[this.symbol] = true
       }
     }
   }
 
-  asValue(value) {
+  asValue (value) {
     if (this.config.type === Number) {
       return Number(value)
     }
@@ -56,23 +56,27 @@ class LocalStorageSetting {
     return value
   }
 
-  asJSON(value) {
+  asJSON (value) {
     return JSON.stringify(value)
   }
 
-  fromJSON(value) {
+  fromJSON (value) {
     return JSON.parse(value)
   }
 }
 
 module.exports = (scope, name, defaultValue, config = {}) => {
-  const localStorageSetting = new LocalStorageSetting(name, defaultValue, config)
+  const localStorageSetting = new LocalStorageSetting(
+    name,
+    defaultValue,
+    config
+  )
 
   Object.defineProperty(scope, name, {
-    get() {
+    get () {
       return localStorageSetting.get()
     },
-    set(value) {
+    set (value) {
       return localStorageSetting.set(value)
     }
   })
