@@ -12,5 +12,8 @@
   "scripts": {
     "test": "jest",
     "lint": "standard --env jest --env browser"
+  },
+  "dependencies": {
+    "function-extend": "https://github.com/leobastiani/function-extend"
   }
 }

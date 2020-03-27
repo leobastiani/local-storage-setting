@@ -54,13 +54,30 @@ describe('can be a', () => {
     expect(obj.name).toStrictEqual(false)
   })
 
-  it('array', () => {
+  it.each`
+    comment
+    ${'without default'}
+    ${'with default'}
+  `('array $comment', ({ comment }) => {
     const obj = {}
-    localStorageSetting(obj, 'name', [123, 456])
-    expect(obj.name).toEqual([123, 456])
-
-    obj.name = [1, 2, 3]
-    expect(obj.name).toEqual([1, 2, 3])
+    if(comment == 'without default') {
+      localStorageSetting(obj, 'name', [1, 2, 3], { type: Array })
+    }
+    else {
+      localStorageSetting(obj, 'name', [], { type: Array })
+      obj.name = [1, 2, 3]
+      expect(localStorage.getItem('name')).toBe('[1,2,3]')
+    }
+    obj.name.push(4)
+    expect(localStorage.getItem('name')).toBe('[1,2,3,4]')
+    obj.name.unshift(0)
+    expect(localStorage.getItem('name')).toBe('[0,1,2,3,4]')
+    obj.name.pop()
+    expect(localStorage.getItem('name')).toBe('[0,1,2,3]')
+    obj.name.shift()
+    expect(localStorage.getItem('name')).toBe('[1,2,3]')
+    obj.name.splice(1, 1)
+    expect(localStorage.getItem('name')).toBe('[1,3]')
   })
 
   it('object', () => {
